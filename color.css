@@ -10,6 +10,8 @@ body.dark {
 
 body, .bg-main {
     background-color: #F5CAC3;
+    background-image: url("images/fondo.jpg");
+    background-size: cover;
 }
 
 .color {
@@ -207,4 +209,14 @@ body, .bg-main {
     border-radius: 5px;
     border: none;
     box-shadow: 4px 4px 15px 0 rgba(0, 0, 0, .3);
+}
+
+#titulo {
+    font-size: 80px;
+    font-weight: bolder;
+}
+
+.lead {
+    font-size: 40px;
+    font-weight: bolder;
 }

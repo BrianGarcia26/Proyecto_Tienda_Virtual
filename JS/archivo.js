@@ -108,29 +108,12 @@ const renderListadoCarrito = () => {
         div.id = "Prod Nº" + producto.id
         div.className = "productoEnCarrito"
         div.innerHTML = `
-            <p>${producto.nombre} x ${producto.cantidad}ud.</p>
+            <p>${producto.nombre}</p>
             <p>Precio: $${producto.precio}</p>
             `
-            //<button id="modal-borrar" class="btn1"><i class="fa-solid fa-trash-can"></i></button>
-        const btn = document.createElement("button")
-        btn.id = "modal-borrar"
-        btn.className = "btn" + producto.id
-        btn.innerHTML = `
-            <i class="fa-solid fa-trash-can"></i>
-            `
-
-        btn.addEventListener("click" , () => {
-            quitarElemento()
-        })
-        
 
         contenedorCarrito.append(div)
-        div.append(btn)
     })
-}
-
-const quitarElemento = () => {
-    
 }
 
 const renderCantidadCarrito = () => {
@@ -191,12 +174,3 @@ const checkearCarrito = () => {
 }
 
 checkearCarrito()
-
-/* const borrador = document.querySelector("#modal-borrar");
-
-
-borrador.addEventListener("click", () => {
-    console.log("hola")
-}) */
-
-/* Swal.fire('Any fool can use a computer') */
