@@ -1,364 +1,202 @@
-// Variable carrito, descuento mayorista y objetos y arrays de los productos
+const titulo = document.getElementById("titulo");
 
-let descuento = 0.1;
-let carrito = 0;
+//Usamos localStorage para guardar el nombre de usuario
 
-class Hilados {
-    constructor (articulo, tipo, peso, material, cantidad, tipoTejido, precioKilo, color) {
-        this.articulo = articulo;
-        this.tipo = tipo;
-        this.peso = peso;
-        this.material = material;
-        this.cantidad = cantidad;
-        this.tipoTejido = tipoTejido;
-        this.precioKilo = precioKilo;
-        this.color = color;
+const checkearUsuario = () => {
+    let usuarioLS = localStorage.getItem("usuario")
+    let usuario = ""
+
+    if (usuarioLS) {
+        usuario = usuarioLS
+    } else {
+        usuario = prompt("Ingrese su nombre:");
+        localStorage.setItem("usuario", usuario);
     }
-    info() {
-        console.log("Art. Nº " + this.articulo + " - " + this.tipo + " de " + this.peso + ", color " + this.color + ", para " + this.tipoTejido + ". Precio por kilo = $" + this.precioKilo);
-    }
+
+    titulo.innerHTML = `Hola ${usuario}. Te damos la bienvenida a Arañita`;
+
 }
 
-const soft4_7_001 = new Hilados(01, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "165 - ORO");
-const soft4_7_002 = new Hilados(02, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "174 - DORADO");
-const soft4_7_003 = new Hilados(03, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "461 - GENCIANA");
-const soft4_7_004 = new Hilados(04, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "582 - OTOÑO");
-const soft4_7_005 = new Hilados(05, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "664 - JEAN");
-const soft4_7_006 = new Hilados(06, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "746 - MIRAGE");
-const soft4_7_007 = new Hilados(07, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "814 - DESIERTO");
-const soft4_7_008 = new Hilados(08, "Madeja", "200 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 1990, "823 - NUEZ");
+checkearUsuario()
 
-const nubeSoft4_7_001 = new Hilados(09, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "100 - PATITO");
-const nubeSoft4_7_002 = new Hilados(10, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "290 - NEGRO");
-const nubeSoft4_7_003 = new Hilados(11, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "610 - CELESTE BEBE");
-const nubeSoft4_7_004 = new Hilados(12, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "690 - MARINO");
-const nubeSoft4_7_005 = new Hilados(13, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "730 - CANTON");
-const nubeSoft4_7_006 = new Hilados(14, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "790 - INGLES");
-const nubeSoft4_7_007 = new Hilados(15, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "800 - BLANCO");
-const nubeSoft4_7_008 = new Hilados(16, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº6, tricot y crochet", 2490, "890 - CHOCOLATE");
+//Creo un boton que borra el usuario y vuelve a preguntar
+const borrarUsuario = document.querySelector("#boton1")
 
-const nubeSoft2_7_002 = new Hilados(17, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "147 - ROCKLET");
-const nubeSoft2_7_001 = new Hilados(18, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "100 - PATITO");
-const nubeSoft2_7_003 = new Hilados(19, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "210 - PLATA");
-const nubeSoft2_7_004 = new Hilados(20, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "310 - ROSA BEBE");
-const nubeSoft2_7_005 = new Hilados(21, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "432 - ALECRIM");
-const nubeSoft2_7_006 = new Hilados(22, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "465 - VIOLETA");
-const nubeSoft2_7_007 = new Hilados(23, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "575 - ROJO");
-const nubeSoft2_7_008 = new Hilados(24, "Ovillo", "100 gr", "100% Acrílico", 100, "Aguja Nº4, tricot, crochet y máquina familiar", 2490, "733 - FLUO");
+borrarUsuario.addEventListener("click", () => {
+    localStorage.removeItem("usuario")
+    checkearUsuario()
+})
 
-const arraySoft4_7 = [soft4_7_001, soft4_7_002, soft4_7_003, soft4_7_004, soft4_7_005, soft4_7_006, soft4_7_007, soft4_7_008];
-const arrayNubeSoft4_7 = [nubeSoft4_7_001, nubeSoft4_7_002, nubeSoft4_7_003, nubeSoft4_7_004, nubeSoft4_7_005, nubeSoft4_7_006, nubeSoft4_7_007, nubeSoft4_7_008];
-const arrayNubeSoft2_7 = [nubeSoft2_7_002, nubeSoft2_7_001, nubeSoft2_7_003, nubeSoft2_7_004, nubeSoft2_7_005, nubeSoft2_7_006, nubeSoft2_7_007, nubeSoft2_7_008];
+//Agrego botones como const
 
-const saludoPedido = [];
+const modalAbrirCarrito = document.querySelector("#modal-abrir-carrito");
+const modalCerrarCarrito = document.querySelector("#modal-cerrar-carrito");
+const modalContainerCarrito = document.querySelector("#modal-container-carrito");
+const contenedorCarrito = document.querySelector("#modal-carrito");
+const contadorCarrito = document.querySelector("#contadorCarrito");
+const contadorPrecioTotal = document.querySelector("#precioTotal");
 
-//Realizo un simulador interactivo en base a una tienda virtual
 
-//Comenzamos con el saludo y bienvenida a la página
+modalAbrirCarrito.addEventListener("click", () => {
+    modalContainerCarrito.classList.toggle("modal-container-active-carrito")
+})
 
-let nombre = prompt("Ingrese su nombre:");
-while(nombre == null || nombre == "") {
-    nombre = prompt("Lo sentimos, debe ingresar su nombre");
+modalCerrarCarrito.addEventListener("click", () => {
+    modalContainerCarrito.classList.toggle("modal-container-active-carrito")
+})
+
+const contenedorProductos = document.querySelector("#productos")
+
+stockProductos.forEach((producto) => {
+    const div = document.createElement("div");
+    div.className = "producto";
+
+    div.innerHTML = `
+        <img src=${producto.img} alt="">
+        <h3>${producto.nombre}</h3>
+        <p>${producto.desc}</p>
+        <p>Tamaño: ${producto.tamaño}</p>
+        <p class="precioProducto">Precio: $${producto.precio}</p>
+    `;
+    const button = document.createElement("button")
+    button.className = `boton-agregar`
+    button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+
+    //Creo el boton por fuera del innerHTML para que el inspector de elementos no me muestre todo el detalle del boton
+    button.addEventListener("click" , () => {
+        agregarAlCarrito(producto.id)
+    })
+
+    div.append(button)
+
+    contenedorProductos.append(div);
+})
+
+const carrito = []
+
+const agregarAlCarrito = (id) => {
+    const producto = stockProductos.find( (item) => item.id === id)
+    carrito.push(producto)
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Producto agregado al carrito',
+        toast: true,
+        timer: 1500,
+        showConfirmButton: false,
+        position: 'bottom-left',
+    })
+
+    renderCarrito()
 }
-alert("Hola, " + nombre + ". Te damos la bienvenida a Arañita. Esperamos que encuentres lo que estás buscando.");
+
+
+const renderCarrito = () => {
+    //El primer codigo limpia el contador para no repetir los productos
+    contenedorCarrito.innerHTML=""
+
+    //Activamos 3 funciones (Actualizamos el listado, mostramos la cantidad de productos, calculamos el total en el carrito)
+    renderListadoCarrito()
+    renderCantidadCarrito()
+    renderTotalCarrito()
+}
+
+const renderListadoCarrito = () => {
+    carrito.forEach((producto) => {
+        const div = document.createElement("div")
+        div.id = "Prod Nº" + producto.id
+        div.className = "productoEnCarrito"
+        div.innerHTML = `
+            <p>${producto.nombre} x ${producto.cantidad}ud.</p>
+            <p>Precio: $${producto.precio}</p>
+            `
+            //<button id="modal-borrar" class="btn1"><i class="fa-solid fa-trash-can"></i></button>
+        const btn = document.createElement("button")
+        btn.id = "modal-borrar"
+        btn.className = "btn" + producto.id
+        btn.innerHTML = `
+            <i class="fa-solid fa-trash-can"></i>
+            `
+
+        btn.addEventListener("click" , () => {
+            quitarElemento()
+        })
+        
+
+        contenedorCarrito.append(div)
+        div.append(btn)
+    })
+}
+
+const quitarElemento = () => {
     
-//Continuamos con el servicio de venta ya sea minorista o mayorista
-
-alert("Contamos con servicios de venta minorista y mayorista. En caso de ser venta mayorista, el monto mínimo de compra debe ser mayor a $10.000");
-let venta = parseInt(prompt("¿Qué tipo de servicio desea?\n1) Venta minorista\n2) Venta mayorista\n3) Salir"));
-while(venta != 1 && venta != 2 && venta != 3 ) {
-    venta = parseInt(prompt("Lo sentimos, debe ingresar un servicio\n1) Venta minorista\n2) Venta mayorista\n3) Salir"));
 }
 
-// Condicional dependiendo si la venta es minorista o mayorista
-
-if (venta == 1) {
-    do {
-        let filtro = parseInt(prompt("Puede elegir alguno de los siguientes filtros para ver la lista de productos:\n1) Modelo\n2) Peso\n3) Tipo de tejido"));
-        while(filtro !== 1 && filtro !== 2 && filtro !== 3) {
-            filtro = parseInt(prompt("Lo sentimos, debe ingresar un tipo de filtro\n1) Modelo\n2) Peso\n3) Tipo de tejido"));
-        }
-        if (filtro == 1) {
-            let modelo = parseInt(prompt("Lista de modelos:\n1) Soft 4/7\n2) Nube Soft 4/7\n3) Nube Soft 2/7"));
-            while(modelo !== 1 && modelo !== 2 && modelo !== 3) {
-                modelo = parseInt(prompt("Por favor, ingresar uno de los modelos listados:\n1) Soft 4/7\n2) Nube Soft 4/7\n3) Nube Soft 2/7"))
-            }
-            // En la consola aparecen los productos filtrados para poder ver los detalles
-            if (modelo == 1) {
-                for (let i = 0; i < arraySoft4_7.length ; i++) {
-                    arraySoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = arraySoft4_7[producto-1].precioKilo / 5;
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = arrayNubeSoft4_7[producto-9].precioKilo / 10;
-                } else if (producto >= 17) {
-                    valor = arrayNubeSoft2_7[producto-17].precioKilo / 10;
-                }
-            }
-            if (modelo == 2) {
-                for (let i = 0; i < arrayNubeSoft4_7.length ; i++) {
-                    arrayNubeSoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = arraySoft4_7[producto-1].precioKilo / 5;
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = arrayNubeSoft4_7[producto-9].precioKilo / 10;
-                } else if (producto >= 17) {
-                    valor = arrayNubeSoft2_7[producto-17].precioKilo / 10;
-                }
-            }
-            if (modelo == 3) {
-                for (let i = 0; i < arrayNubeSoft2_7.length ; i++) {
-                    arrayNubeSoft2_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = arraySoft4_7[producto-1].precioKilo / 5;
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = arrayNubeSoft4_7[producto-9].precioKilo / 10;
-                } else if (producto >= 17) {
-                    valor = arrayNubeSoft2_7[producto-17].precioKilo / 10;
-                }
-            }
-            cantidad = parseInt(prompt("¿Cuántos desea comprar?"));
-            carrito = carrito + (cantidad*valor);
-            alert("Tu carrito: $" + carrito);
-            final = parseInt(prompt("1) Seguir comprando\n2) Finalizar compra"));
-        } else if (filtro == 2) {
-            let peso = parseInt(prompt("Lista de peso:\n1) 100gr\n2) 200gr"));
-            while(peso !== 1 && peso !== 2) {
-                peso = parseInt(prompt("Por favor, ingresar uno de los pesos listados:\n1) 100gr\n2) 200gr"))
-            }
-            if (peso == 1) {
-                for (let i = 0; i < arrayNubeSoft4_7.length ; i++) {
-                    arrayNubeSoft4_7[i].info();
-                }
-                for (let i = 0; i < arrayNubeSoft2_7.length ; i++) {
-                    arrayNubeSoft2_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = arraySoft4_7[producto-1].precioKilo / 5;
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = arrayNubeSoft4_7[producto-9].precioKilo / 10;
-                } else if (producto >= 17) {
-                    valor = arrayNubeSoft2_7[producto-17].precioKilo / 10;
-                }
-            }
-            if (peso == 2) {
-                for (let i = 0; i < arraySoft4_7.length ; i++) {
-                    arraySoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = arraySoft4_7[producto-1].precioKilo / 5;
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = arrayNubeSoft4_7[producto-9].precioKilo / 10;
-                } else if (producto >= 17) {
-                    valor = arrayNubeSoft2_7[producto-17].precioKilo / 10;
-                }
-            }
-            cantidad = parseInt(prompt("¿Cuántos desea comprar?"));
-            carrito = carrito + (cantidad*valor);
-            alert("Tu carrito: $" + carrito);
-            final = parseInt(prompt("1) Seguir comprando\n2) Finalizar compra"));
-        } else if (filtro == 3) {
-            let tipoTejido = parseInt(prompt("Lista de tipos de tejidos:\n1) Aguja Nº6, tricot y crochet\n2) Aguja Nº4, tricot, crochet y máquina familiar"));
-            while(tipoTejido !== 1 && tipoTejido !== 2) {
-                tipoTejido = parseInt(prompt("Por favor, ingresar uno de los pesos listados:\n1) Aguja Nº6, tricot y crochet\n2) Aguja Nº4, tricot, crochet y máquina familiar"))
-            }
-            if (tipoTejido == 1) {
-                for (let i = 0; i < arraySoft4_7.length ; i++) {
-                    arraySoft4_7[i].info();
-                }
-                for (let i = 0; i < arrayNubeSoft4_7.length ; i++) {
-                    arrayNubeSoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = arraySoft4_7[producto-1].precioKilo / 5;
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = arrayNubeSoft4_7[producto-9].precioKilo / 10;
-                } else if (producto >= 17) {
-                    valor = arrayNubeSoft2_7[producto-17].precioKilo / 10;
-                }
-            }
-            if (tipoTejido == 2) {
-                for (let i = 0; i < arrayNubeSoft2_7.length ; i++) {
-                    arrayNubeSoft2_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = arraySoft4_7[producto-1].precioKilo / 5;
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = arrayNubeSoft4_7[producto-9].precioKilo / 10;
-                } else if (producto >= 17) {
-                    valor = arrayNubeSoft2_7[producto-17].precioKilo / 10;
-                }
-            }
-            cantidad = parseInt(prompt("¿Cuántos desea comprar?"));
-            carrito = carrito + (cantidad*valor);
-            alert("Tu carrito: $" + carrito);
-            final = parseInt(prompt("1) Seguir comprando\n2) Finalizar compra"));
-        }
-    } while (final == 1);
-    mail = prompt("Ingresar mail para recibir los datos y poder realizar el pago"); 
-    alert("Muchas gracias por tu compra. Se enviaron los datos a " + mail);
-} else if (venta == 2) {
-    do {
-        let filtro = parseInt(prompt("Puede elegir alguno de los siguientes filtros para ver la lista de productos:\n1) Modelo\n2) Peso\n3) Tipo de tejido"));
-        while(filtro !== 1 && filtro !== 2 && filtro !== 3) {
-            filtro = parseInt(prompt("Lo sentimos, debe ingresar un tipo de filtro\n1) Modelo\n2) Peso\n3) Tipo de tejido"));
-        }
-        if (filtro == 1) {
-            let modelo = parseInt(prompt("Lista de modelos:\n1) Soft 4/7\n2) Nube Soft 4/7\n3) Nube Soft 2/7"));
-            while(modelo !== 1 && modelo !== 2 && modelo !== 3) {
-                modelo = parseInt(prompt("Por favor, ingresar uno de los modelos listados:\n1) Soft 4/7\n2) Nube Soft 4/7\n3) Nube Soft 2/7"))
-            }
-            if (modelo == 1) {
-                for (let i = 0; i < arraySoft4_7.length ; i++) {
-                    arraySoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = (arraySoft4_7[producto-1].precioKilo / 5) - ((arraySoft4_7[producto-1].precioKilo / 5)*descuento);
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = (arrayNubeSoft4_7[producto-9].precioKilo / 10) - ((arrayNubeSoft4_7[producto-9].precioKilo / 10)*descuento);
-                } else if (producto >= 17) {
-                    valor = (arrayNubeSoft2_7[producto-17].precioKilo / 10) - ((arrayNubeSoft2_7[producto-17].precioKilo / 10)*descuento);
-                }
-            }
-            if (modelo == 2) {
-                for (let i = 0; i < arrayNubeSoft4_7.length ; i++) {
-                    arrayNubeSoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = (arraySoft4_7[producto-1].precioKilo / 5) - ((arraySoft4_7[producto-1].precioKilo / 5)*descuento);
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = (arrayNubeSoft4_7[producto-9].precioKilo / 10) - ((arrayNubeSoft4_7[producto-9].precioKilo / 10)*descuento);
-                } else if (producto >= 17) {
-                    valor = (arrayNubeSoft2_7[producto-17].precioKilo / 10) - ((arrayNubeSoft2_7[producto-17].precioKilo / 10)*descuento);
-                }
-            }
-            if (modelo == 3) {
-                for (let i = 0; i < arrayNubeSoft2_7.length ; i++) {
-                    arrayNubeSoft2_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = (arraySoft4_7[producto-1].precioKilo / 5) - ((arraySoft4_7[producto-1].precioKilo / 5)*descuento);
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = (arrayNubeSoft4_7[producto-9].precioKilo / 10) - ((arrayNubeSoft4_7[producto-9].precioKilo / 10)*descuento);
-                } else if (producto >= 17) {
-                    valor = (arrayNubeSoft2_7[producto-17].precioKilo / 10) - ((arrayNubeSoft2_7[producto-17].precioKilo / 10)*descuento);
-                }
-            }
-            cantidad = parseInt(prompt("¿Cuántos desea comprar?"));
-            carrito = carrito + (cantidad*valor);
-            alert("Tu carrito: $" + carrito);
-            final = parseInt(prompt("1) Seguir comprando\n2) Finalizar compra"));
-        } else if (filtro == 2) {
-            let peso = parseInt(prompt("Lista de peso:\n1) 100gr\n2) 200gr"));
-            while(peso !== 1 && peso !== 2) {
-                peso = parseInt(prompt("Por favor, ingresar uno de los pesos listados:\n1) 100gr\n2) 200gr"))
-            }
-            if (peso == 1) {
-                for (let i = 0; i < arrayNubeSoft4_7.length ; i++) {
-                    arrayNubeSoft4_7[i].info();
-                }
-                for (let i = 0; i < arrayNubeSoft2_7.length ; i++) {
-                    arrayNubeSoft2_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = (arraySoft4_7[producto-1].precioKilo / 5) - ((arraySoft4_7[producto-1].precioKilo / 5)*descuento);
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = (arrayNubeSoft4_7[producto-9].precioKilo / 10) - ((arrayNubeSoft4_7[producto-9].precioKilo / 10)*descuento);
-                } else if (producto >= 17) {
-                    valor = (arrayNubeSoft2_7[producto-17].precioKilo / 10) - ((arrayNubeSoft2_7[producto-17].precioKilo / 10)*descuento);
-                }
-            }
-            if (peso == 2) {
-                for (let i = 0; i < arraySoft4_7.length ; i++) {
-                    arraySoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = (arraySoft4_7[producto-1].precioKilo / 5) - ((arraySoft4_7[producto-1].precioKilo / 5)*descuento);
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = (arrayNubeSoft4_7[producto-9].precioKilo / 10) - ((arrayNubeSoft4_7[producto-9].precioKilo / 10)*descuento);
-                } else if (producto >= 17) {
-                    valor = (arrayNubeSoft2_7[producto-17].precioKilo / 10) - ((arrayNubeSoft2_7[producto-17].precioKilo / 10)*descuento);
-                }
-            }
-            cantidad = parseInt(prompt("¿Cuántos desea comprar?"));
-            carrito = carrito + (cantidad*valor);
-            alert("Tu carrito: $" + carrito);
-            final = parseInt(prompt("1) Seguir comprando\n2) Finalizar compra"));
-        } else if (filtro == 3) {
-            let tipoTejido = parseInt(prompt("Lista de tipos de tejidos:\n1) Aguja Nº6, tricot y crochet\n2) Aguja Nº4, tricot, crochet y máquina familiar"));
-            while(tipoTejido !== 1 && tipoTejido !== 2) {
-                tipoTejido = parseInt(prompt("Por favor, ingresar uno de los pesos listados:\n1) Aguja Nº6, tricot y crochet\n2) Aguja Nº4, tricot, crochet y máquina familiar"))
-            }
-            if (tipoTejido == 1) {
-                for (let i = 0; i < arraySoft4_7.length ; i++) {
-                    arraySoft4_7[i].info();
-                }
-                for (let i = 0; i < arrayNubeSoft4_7.length ; i++) {
-                    arrayNubeSoft4_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = (arraySoft4_7[producto-1].precioKilo / 5) - ((arraySoft4_7[producto-1].precioKilo / 5)*descuento);
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = (arrayNubeSoft4_7[producto-9].precioKilo / 10) - ((arrayNubeSoft4_7[producto-9].precioKilo / 10)*descuento);
-                } else if (producto >= 17) {
-                    valor = (arrayNubeSoft2_7[producto-17].precioKilo / 10) - ((arrayNubeSoft2_7[producto-17].precioKilo / 10)*descuento);
-                }
-            }
-            if (tipoTejido == 2) {
-                for (let i = 0; i < arrayNubeSoft2_7.length ; i++) {
-                    arrayNubeSoft2_7[i].info();
-                }
-                let producto = parseInt(prompt("Si alguno de los productos es de tu interes podes ingresar el número de artículo"));
-                let cantidad = 0;
-                if (producto <= 8) {
-                    valor = (arraySoft4_7[producto-1].precioKilo / 5) - ((arraySoft4_7[producto-1].precioKilo / 5)*descuento);
-                } else if (producto >= 9 && producto <= 16) {
-                    valor = (arrayNubeSoft4_7[producto-9].precioKilo / 10) - ((arrayNubeSoft4_7[producto-9].precioKilo / 10)*descuento);
-                } else if (producto >= 17) {
-                    valor = (arrayNubeSoft2_7[producto-17].precioKilo / 10) - ((arrayNubeSoft2_7[producto-17].precioKilo / 10)*descuento);
-                }
-            }
-            cantidad = parseInt(prompt("¿Cuántos desea comprar?"));
-            carrito = carrito + (cantidad*valor);
-            alert("Tu carrito: $" + carrito);
-            final = parseInt(prompt("1) Seguir comprando\n2) Finalizar compra"));
-        }
-        if (final == 2 && carrito < 10000) {
-            alert("Tu carrito tiene un valor de $" + carrito + ". Te faltan $" + (10000-carrito) + " para que la compra sea considerada mayorista.")
-        }
-    } while (final == 1 || carrito < 10000);
-    mail = prompt("Ingresar mail para recibir los datos y poder realizar el pago"); 
-    alert("Muchas gracias por tu compra. Se enviaron los datos a " + mail);
-} else if (venta == 3) {
-    // En caso de no requerir ningún servicio procedemos a saludar.
-    alert("Esperamos que vuelva pronto");
+const renderCantidadCarrito = () => {
+    contadorCarrito.innerText = carrito.length
 }
+
+const renderTotalCarrito = () => {
+    contadorPrecioTotal.innerText = carrito.reduce((acc, producto) => acc += producto.precio, 0)
+}
+
+const vaciarCarrito = document.querySelector("#modal-vaciar")
+
+vaciarCarrito.addEventListener("click", () => {
+
+    Swal.fire({
+        title: '¿Desea vaciar el carrito?',
+        text: "No podrá recuperar los productos",
+        icon: 'info',
+        showCancelButton: true,
+        color: 'white',
+        confirmButtonColor: '#1b66ff', 
+        cancelButtonColor: '#f40034', 
+        confirmButtonText: 'Si, vaciar',
+        cancelButtonText: 'Cancelar',
+        background: '#995D81'
+      }).then((result) => {
+
+        if (result.isConfirmed) {
+            Swal.fire({
+                title:'Listo',
+                text:'Tu carrito fue vaciado',
+                icon:'success',
+                color: 'white',
+                background: '#995D81'
+            })
+
+            carrito.length = 0
+            localStorage.setItem("carrito", JSON.stringify(carrito))        
+            renderCarrito()
+
+        }
+      })
+})
+
+const carritoLS = JSON.parse(localStorage.getItem("carrito"))
+
+//Con checkear Carrito lo que hacemos es poder verificar si habia productos en el carrito anteriormente
+const checkearCarrito = () => {
+    if (carritoLS) {
+        for (const producto of carritoLS) {
+            carrito.push(producto)
+        }
+    } else {
+        localStorage.setItem("carrito", carrito)
+    }
+
+    renderCarrito()
+}
+
+checkearCarrito()
+
+/* const borrador = document.querySelector("#modal-borrar");
+
+
+borrador.addEventListener("click", () => {
+    console.log("hola")
+}) */
+
+/* Swal.fire('Any fool can use a computer') */
