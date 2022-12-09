@@ -220,3 +220,9 @@ body, .bg-main {
     font-size: 40px;
     font-weight: bolder;
 }
+
+.pie {
+    background-color: #eaa;
+    margin: 0;
+    padding: 12px;
+}

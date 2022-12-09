@@ -17,7 +17,17 @@ const checkearUsuario = () => {
 
 }
 
-checkearUsuario()
+//Generamos una promesa
+
+const revisarUsuario = () => {
+    return new Promise( (resolve, reject) => {
+        setTimeout(() => {
+            checkearUsuario()
+        }, 3000)
+    })
+}
+
+revisarUsuario()
 
 //Creo un boton que borra el usuario y vuelve a preguntar
 const borrarUsuario = document.querySelector("#boton1")
@@ -47,50 +57,55 @@ modalCerrarCarrito.addEventListener("click", () => {
 
 const contenedorProductos = document.querySelector("#productos")
 
-stockProductos.forEach((producto) => {
-    const div = document.createElement("div");
-    div.className = "producto";
+fetch(`./JS/data.json`)
+    .then((resp) => resp.json())
+    .then((data) => {
 
-    div.innerHTML = `
-        <img src=${producto.img} alt="">
-        <h3>${producto.nombre}</h3>
-        <p>${producto.desc}</p>
-        <p>Tamaño: ${producto.tamaño}</p>
-        <p class="precioProducto">Precio: $${producto.precio}</p>
-    `;
-    const button = document.createElement("button")
-    button.className = `boton-agregar`
-    button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+        data.forEach((producto) => {
+            const div = document.createElement("div");
+            div.className = "producto";
 
-    //Creo el boton por fuera del innerHTML para que el inspector de elementos no me muestre todo el detalle del boton
-    button.addEventListener("click" , () => {
-        agregarAlCarrito(producto.id)
+            div.innerHTML = `
+                <img src=${producto.img} alt="">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.desc}</p>
+                <p>Tamaño: ${producto.tamaño}</p>
+                <p class="precioProducto">Precio: $${producto.precio}</p>
+            `;
+            const button = document.createElement("button")
+            button.className = `boton-agregar`
+            button.innerHTML = `Agregar <i class="fas fa-shopping-cart"></i>`
+
+            //Creo el boton por fuera del innerHTML para que el inspector de elementos no me muestre todo el detalle del boton
+            button.addEventListener("click" , () => {
+                agregarAlCarrito(producto.id)
+            })
+
+            div.append(button)
+
+            contenedorProductos.append(div);
+        })
+
+        const agregarAlCarrito = (id) => {
+            const producto = data.find( (item) => item.id === id)
+            carrito.push(producto)
+            localStorage.setItem("carrito", JSON.stringify(carrito))
+        
+            Swal.fire({
+                icon: 'success',
+                title: 'Producto agregado al carrito',
+                toast: true,
+                timer: 1500,
+                showConfirmButton: false,
+                position: 'bottom-left',
+            })
+        
+            renderCarrito()
+        }
+
     })
-
-    div.append(button)
-
-    contenedorProductos.append(div);
-})
 
 const carrito = []
-
-const agregarAlCarrito = (id) => {
-    const producto = stockProductos.find( (item) => item.id === id)
-    carrito.push(producto)
-    localStorage.setItem("carrito", JSON.stringify(carrito))
-
-    Swal.fire({
-        icon: 'success',
-        title: 'Producto agregado al carrito',
-        toast: true,
-        timer: 1500,
-        showConfirmButton: false,
-        position: 'bottom-left',
-    })
-
-    renderCarrito()
-}
-
 
 const renderCarrito = () => {
     //El primer codigo limpia el contador para no repetir los productos
